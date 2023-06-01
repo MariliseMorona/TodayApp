@@ -8,10 +8,13 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    lazy var listView = NoteListView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        view = listView
+        listView.backgroundColor = .orange
         // Do any additional setup after loading the view.
     }
 
