@@ -9,6 +9,9 @@ import UIKit
 
 class NoteTableViewCell : UITableViewCell {
     
+    var onClick: (() -> Void)?
+    private var descriptionIsEmpty: Bool = false
+    
     lazy var noteView : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -21,10 +24,10 @@ class NoteTableViewCell : UITableViewCell {
         return title
     }()
     
-    lazy var noteData: UILabel = {
-        let data = UILabel()
-        data.translatesAutoresizingMaskIntoConstraints = false
-        return data
+    lazy var noteDate: UILabel = {
+        let date = UILabel()
+        date.translatesAutoresizingMaskIntoConstraints = false
+        return date
     }()
     
     lazy var noteDescription: UILabel = {
@@ -36,7 +39,11 @@ class NoteTableViewCell : UITableViewCell {
     lazy var noteBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.backgroundColor = .orange
+        btn.addTarget(self, action: #selector(pressBtn), for: .touchUpInside)
+        btn.layer.borderColor = Colors.green.cgColor
+        btn.layer.borderWidth = 2
+        btn.layer.cornerRadius = 10
+        btn.sizeToFit()
         return btn
     }()
     
@@ -49,38 +56,57 @@ class NoteTableViewCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func pressBtn() {
+        guard let click = self.onClick else { return }
+        click()
+    }
+    
+    func bindCell(data: Reminder) {
+        noteTitle.text = data.title
+        noteDate.text = data.limitDate.description
+        noteDescription.text = data.notes
+        descriptionIsEmpty = false
+        if let description = data.notes, description == nil || description.isEmpty {
+            descriptionIsEmpty = true
+        }
+    }
+    
     func setUp() {
-        addSubview(noteView)
+        addSubview(contentView)
+        contentView.addSubview(noteView)
         noteView.addSubview(noteBtn)
         noteView.addSubview(noteTitle)
-        noteView.addSubview(noteData)
+        noteView.addSubview(noteDate)
         noteView.addSubview(noteDescription)
         constrains()
     }
     
     func constrains() {
         NSLayoutConstraint.activate([
-            noteView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            noteView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 15),
-            noteView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 5),
+            noteView.topAnchor.constraint(equalTo: topAnchor),
+            noteView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            noteView.bottomAnchor.constraint(equalTo: bottomAnchor),
             noteView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             
-            noteBtn.topAnchor.constraint(equalTo: noteView.topAnchor),
             noteBtn.centerYAnchor.constraint(equalTo: noteView.centerYAnchor),
-            noteBtn.heightAnchor.constraint(equalToConstant: 15),
-            noteBtn.widthAnchor.constraint(equalToConstant: 15),
+            noteBtn.leadingAnchor.constraint(equalTo: noteView.leadingAnchor, constant: 5),
+            noteBtn.heightAnchor.constraint(equalToConstant: 20),
+            noteBtn.widthAnchor.constraint(equalToConstant: 20),
             
-            noteTitle.topAnchor.constraint(equalTo: noteView.topAnchor),
+            noteTitle.topAnchor.constraint(equalTo: noteView.topAnchor, constant: 5),
             noteTitle.leadingAnchor.constraint(equalTo: noteBtn.trailingAnchor, constant: 10),
-            noteTitle.trailingAnchor.constraint(equalTo: noteView.trailingAnchor),
+            noteTitle.trailingAnchor.constraint(equalTo: noteView.trailingAnchor, constant: -5),
+            noteTitle.bottomAnchor.constraint(equalTo: noteDate.topAnchor),
             
-            noteData.topAnchor.constraint(equalTo: noteTitle.bottomAnchor),
-            noteData.leadingAnchor.constraint(equalTo: noteTitle.leadingAnchor),
-            noteData.trailingAnchor.constraint(equalTo: noteTitle.trailingAnchor),
+            noteDate.centerYAnchor.constraint(equalTo: noteView.centerYAnchor),
+            noteDate.leadingAnchor.constraint(equalTo: noteTitle.leadingAnchor),
+            noteDate.trailingAnchor.constraint(equalTo: noteTitle.trailingAnchor),
             
-            noteDescription.topAnchor.constraint(equalTo: noteData.bottomAnchor),
-            noteDescription.leadingAnchor.constraint(equalTo: noteData.leadingAnchor),
-            noteDescription.trailingAnchor.constraint(equalTo: noteData.trailingAnchor),
+            noteDescription.topAnchor.constraint(equalTo: noteDate.bottomAnchor),
+            noteDescription.leadingAnchor.constraint(equalTo: noteDate.leadingAnchor),
+            noteDescription.trailingAnchor.constraint(equalTo: noteDate.trailingAnchor),
+            noteDescription.bottomAnchor.constraint(equalTo: noteView.bottomAnchor, constant: -5)
+
         ])
     }
 }

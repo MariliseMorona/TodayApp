@@ -7,55 +7,62 @@
 
 import Foundation
 
-struct Reminder {
+class Reminder {
     let title: String
-    let limitData: Date
+    let limitDate: Date
     let notes: String?
-    let concluded: Bool
+    var concluded: Bool
+    
+    init(title: String, limitDate: Date, notes: String?, concluded: Bool){
+        self.title = title
+        self.limitDate = limitDate
+        self.notes = notes
+        self.concluded = concluded
+    }
 }
 
 extension Reminder {
-    static var listReminders = {
+    static var listReminders = [
         Reminder(
             title: "Refatorar GitHub",
-            limitData: Date().addingTimeInterval(800),
+            limitDate: Date().addingTimeInterval(800),
             notes: "Selecionando projetos",
-            concluded: true);
+            concluded: true),
         
         Reminder(
             title: "Refatorar GitHub",
-            limitData: Date().addingTimeInterval(900),
+            limitDate: Date().addingTimeInterval(900),
             notes: "Excluindo projetos",
-            concluded: true);
+            concluded: true),
         
         Reminder(
             title: "Refatorar GitHub",
-            limitData: Date().addingTimeInterval(300),
+            limitDate: Date().addingTimeInterval(300),
             notes: "Inserindo projeto de playground",
-            concluded: false);
+            concluded: false),
         
         Reminder(
             title: "Refatorar GitHub",
-            limitData: Date().addingTimeInterval(200),
+            limitDate: Date().addingTimeInterval(200),
             notes: "",
-            concluded: true);
+            concluded: true),
         
         Reminder(
             title: "Refatorar GitHub",
-            limitData: Date().addingTimeInterval(100),
+            limitDate: Date().addingTimeInterval(100),
             notes: "Atualizando perfil",
-            concluded: true);
+            concluded: true),
         
         Reminder(
             title: "Refatorar GitHub",
-            limitData: Date().addingTimeInterval(700),
+            limitDate: Date().addingTimeInterval(700),
             notes: "Inserindo bagdes",
-            concluded: false);
+            concluded: false),
         
         Reminder(
             title: "Refatorar GitHub",
-            limitData: Date().addingTimeInterval(750),
+            limitDate: Date().addingTimeInterval(750),
             notes: "",
             concluded: true)
-    }
+    ]
 }
