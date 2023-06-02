@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NoteListViewController.swift
 //  TodayApp
 //
 //  Created by Marilise Morona on 01/06/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class NoteListViewController: UIViewController {
     
     lazy var listView = NoteListView()
     var noteList = Reminder.listReminders
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return noteList.count
     }
@@ -41,6 +41,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             self.changeStateOfTheNote(note: self.noteList[indexPath.row], indexPath: indexPath)
         }
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = DetailsViewController(note: noteList[indexPath.row])
+        navigationController?.show(controller, sender: .none)
     }
 }
 
