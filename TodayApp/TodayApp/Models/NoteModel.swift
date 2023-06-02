@@ -8,9 +8,9 @@
 import Foundation
 
 class Reminder {
-    let title: String
-    let limitDate: Date
-    let notes: String?
+    var title: String?
+    var limitDate: Date
+    var notes: String?
     var concluded: Bool
     
     init(title: String, limitDate: Date, notes: String?, concluded: Bool){

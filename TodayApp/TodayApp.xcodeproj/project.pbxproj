@@ -16,6 +16,7 @@
 		482573A72A294638003455EB /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482573A62A294638003455EB /* NoteTableViewCell.swift */; };
 		482573A92A2951EB003455EB /* Ext_Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482573A82A2951EB003455EB /* Ext_Colors.swift */; };
 		482573B02A29689D003455EB /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482573AF2A29689D003455EB /* DetailsViewController.swift */; };
+		482573B32A296BF6003455EB /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482573B22A296BF6003455EB /* DetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		482573A62A294638003455EB /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		482573A82A2951EB003455EB /* Ext_Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ext_Colors.swift; sourceTree = "<group>"; };
 		482573AF2A29689D003455EB /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		482573B22A296BF6003455EB /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,9 +113,18 @@
 		482573AE2A296888003455EB /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				482573B12A296BE1003455EB /* Views */,
 				482573AF2A29689D003455EB /* DetailsViewController.swift */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		482573B12A296BE1003455EB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				482573B22A296BF6003455EB /* DetailsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 				482573A32A2941FF003455EB /* NoteModel.swift in Sources */,
 				482573A52A2944B6003455EB /* NoteListView.swift in Sources */,
 				482573B02A29689D003455EB /* DetailsViewController.swift in Sources */,
+				482573B32A296BF6003455EB /* DetailsView.swift in Sources */,
 				482573A72A294638003455EB /* NoteTableViewCell.swift in Sources */,
 				4825738B2A294083003455EB /* AppDelegate.swift in Sources */,
 			);
