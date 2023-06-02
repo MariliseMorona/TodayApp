@@ -56,16 +56,22 @@ class DetailsViewController: UIViewController {
 
 extension DetailsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let alert = UIAlertController(title: "Ops", message: "É necessário implementar um banco de dados para armazenar as alterações.", preferredStyle: .actionSheet)
-        alert.show(self, sender: .none)
+        detailsView.noteView.layer.borderColor = Colors.green.cgColor
     }
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         return false
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return false
+        return true
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText: NSString = textField.text as NSString? ?? ""
+        let newText = currentText.replacingCharacters(in: range, with: string)
+        return true
+        
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
+        detailsView.noteView.layer.borderColor = Colors.yellow.cgColor
         if let title = detailsView.noteTitle.text {
             noteDetail.title = title
             updateHour(value: title, isTitle: true)
