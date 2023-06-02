@@ -20,6 +20,11 @@ class NoteListViewController: UIViewController {
         noteList = Reminder.listReminders
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        listView.listNotes.reloadData()
+    }
+    
     private func changeStateOfTheNote(note: Reminder, indexPath: IndexPath){
         note.concluded == true ? (note.concluded = false) : (note.concluded = true)
         listView.listNotes.reloadRows(at: [indexPath], with: .fade)

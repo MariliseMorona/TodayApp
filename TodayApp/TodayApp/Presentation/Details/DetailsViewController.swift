@@ -39,6 +39,7 @@ class DetailsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     func updateHour(value: String, isTitle: Bool){
         if isTitle {
             if value == isOldTitle {
@@ -74,7 +75,5 @@ extension DetailsViewController: UITextFieldDelegate {
             noteDetail.notes = description
             updateHour(value: description, isTitle: false)
         }
-        
     }
-    
 }
