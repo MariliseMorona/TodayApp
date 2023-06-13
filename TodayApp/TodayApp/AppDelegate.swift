@@ -21,5 +21,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navigation
         return true
     }
-    
 }

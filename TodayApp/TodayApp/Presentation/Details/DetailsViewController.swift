@@ -11,10 +11,9 @@ class DetailsViewController: UIViewController {
     
     lazy var detailsView = DetailsView()
     private var noteDetail: Reminder!
+    var viewModel: DetailViewModel!
     
-    private var isOldTitle: String = ""
-    private var isOldDescription: String = ""
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         view = detailsView
@@ -23,35 +22,21 @@ class DetailsViewController: UIViewController {
         detailsView.bindCell(title: "Título", description: "Descrição")
     }
     
+    fileprivate func validUITextField(_ textField: UITextField ) {
+        textField.text = viewModel.setTitle()
+    }
+
+    
     init(note: Reminder){
         super.init(nibName: nil, bundle: nil)
         noteDetail = note
-        if let tit = noteDetail.title, !tit.isEmpty {
-            isOldTitle = tit
-            detailsView.noteTitle.text = tit
-        }
-        if let desc = noteDetail.notes, !desc.isEmpty {
-            isOldDescription = desc
-            detailsView.noteDescription.text = desc
-        }
+        viewModel = DetailViewModel(note: noteDetail)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func updateHour(value: String, isTitle: Bool){
-        if isTitle {
-            if value == isOldTitle {
-                noteDetail.limitDate = Date()
-            }
-        } else {
-            if value == isOldDescription {
-                noteDetail.limitDate = Date()
-            }
-        }
-        
-    }
+
 }
 
 extension DetailsViewController: UITextFieldDelegate {
@@ -74,12 +59,11 @@ extension DetailsViewController: UITextFieldDelegate {
         detailsView.noteView.layer.borderColor = Colors.yellow.cgColor
         if let title = detailsView.noteTitle.text {
             noteDetail.title = title
-            updateHour(value: title, isTitle: true)
+            viewModel.updateHour(title, isTitle: true)
         }
-        
         if let description = detailsView.noteDescription.text {
             noteDetail.notes = description
-            updateHour(value: description, isTitle: false)
+            viewModel.updateHour(description, isTitle: false)
         }
     }
 }
